@@ -22,12 +22,10 @@ class SnakeGame
         direction = Direction.Right;
         gameOver = false;
 
-        // Initial snake position and length
         snake.Add(new int[] { 5, 5 });
         snake.Add(new int[] { 4, 5 });
         snake.Add(new int[] { 3, 5 });
 
-        // Initial food position
         SpawnFood();
     }
 
@@ -44,16 +42,14 @@ class SnakeGame
     {
         Console.Clear();
 
-        // Draw snake
         foreach (var segment in snake)
         {
             Console.SetCursorPosition(segment[0], segment[1]);
             Console.Write("■");
         }
 
-        // Draw food
         Console.SetCursorPosition(food[0], food[1]);
-        Console.Write("&");
+        Console.Write("&"); //выглядит аппетитно
     }
 
     private void Move()
@@ -76,14 +72,12 @@ class SnakeGame
                 break;
         }
 
-        // Check if snake hits the border or itself
         if (head[0] <= 0 || head[0] >= (int)Border.MaxRight || head[1] <= 0 || head[1] >= (int)Border.MaxBottom
             || snake.Any(segment => segment.SequenceEqual(head)))
         {
             gameOver = true;
         }
 
-        // Check if snake eats food
         if (head.SequenceEqual(food))
         {
             snake.Insert(0, head);
@@ -126,7 +120,7 @@ class SnakeGame
 
             Move();
             Draw();
-            Thread.Sleep(100); // Adjust the speed of the snake
+            Thread.Sleep(100); 
         }
 
         Console.Clear();
